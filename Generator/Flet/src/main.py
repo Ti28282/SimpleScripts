@@ -1,6 +1,6 @@
 import flet as ft
 import ctypes
-from generator import Generation
+from storage.data.generator import Generation
 
 ICON_PATH = "assets\\password_icon.ico"
 
@@ -63,16 +63,23 @@ class PasswordGeneratorUI(ft.Container):
 
 
     def generate_password(self, event):
-        length = int(self.slider.value)
-        use_numbers = self.include_numbers.value
-        use_letters = self.include_letters.value
-        use_symbols = self.include_symbols.value
+        self.password_field.color = "white"
+        try:
+            
+            length = int(self.slider.value)
+            use_numbers = self.include_numbers.value
+            use_letters = self.include_letters.value
+            use_symbols = self.include_symbols.value
 
-        
-        new_password = Generation(length, use_numbers, use_letters, use_symbols)
+            new_password = Generation(length, use_numbers, use_letters, use_symbols)
 
-        self.password_field.value = new_password
-        self.update()
+            self.password_field.value = new_password
+            self.update()
+
+        except ValueError:
+            self.password_field.value = "(numbers, letters, symbols) must be True"
+            self.password_field.color = "red"
+            self.update()
 
         
         
