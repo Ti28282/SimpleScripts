@@ -1,6 +1,6 @@
 import flet as ft
 import ctypes
-from storage.data.generator import Generation
+from generator import Generation
 
 ICON_PATH = "assets\\password_icon.ico"
 
